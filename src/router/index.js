@@ -1,13 +1,15 @@
 import { createRouter, createWebHistory } from 'vue-router'
 import TasksList from '../views/TasksList.vue'
 import About from '../views/About.vue'
-import TaskDetails from '../views/TaskDetails.vue'
+import TaskDetails from '../views/task/Details.vue'
 
 const routes = [
   {
     path: '/',
     name: 'TasksList',
-    component: TasksList
+    component: TasksList,
+    // if page exists parse the string to an integer otherwise return 1
+    props: route => ({ page: parseInt(route.query.page) || 1 })
   },
   {
     path: '/about',
@@ -20,6 +22,12 @@ const routes = [
     props: true,
     component: TaskDetails
   }
+  // },
+  // {
+  //   path: '/tasks/:page',
+  //   component: TasksList,
+  //   props: route => ({ page: parseInt(route.query.page) || 1 })
+  // }
 ]
 
 const router = createRouter({
